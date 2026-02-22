@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chillies & Garlic - Yield Calculator</title>
+    <style>
+        :root {
+            --primary: #c2185b; 
+            --grey: #717171;
+            --bg: #fdfdfd;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 0 1rem 0; /* Reduced bottom padding */
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            /* Now matches the card max-width (400px) */
+            width: 90%;
+            max-width: 400px; 
+            height: auto;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .initiative-text {
+            color: var(--grey);
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            max-width: 400px;
+            width: 90%;
+        }
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            width: 90%;
+            max-width: 400px;
+            border-top: 5px solid var(--primary);
+            box-sizing: border-box; /* Ensures padding doesn't affect width */
+        }
+        h2 { margin-top: 0; color: var(--primary); text-align: center; font-size: 1.5rem; }
+        .input-group { margin-bottom: 1.2rem; }
+        label { display: block; margin-bottom: 0.4rem; font-weight: 600; color: #444; }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            outline-color: var(--primary);
+        }
+        .result-area {
+            background: #fff0f6;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 1.5rem;
+            border: 1px dashed var(--primary);
+        }
+        .result-label { font-size: 0.85rem; color: var(--grey); display: block; }
+        .result-value {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <img src="SocialMediaPostMaker_24052020_211522.png" alt="Chillies & Garlic Logo" class="logo">
+    <div class="initiative-text">An initiative by Chillies & Garlic Comm Co.</div>
+</header>
+
+<div class="card">
+    <h2>Yield Calculator</h2>
+    
+    <div class="input-group">
+        <label for="baseRate">Base Rate (Raw Garlic purchase rate)</label>
+        <input type="number" id="baseRate" placeholder="0.00" oninput="calculate()">
+    </div>
+
+    <div class="input-group">
+        <label for="expenses">Expenses (Transport + Peeling)</label>
+        <input type="number" id="expenses" placeholder="0.00" oninput="calculate()">
+    </div>
+
+    <div class="input-group">
+        <label for="utara">Utara (Yield %)</label>
+        <input type="number" id="utara" placeholder="e.g. 70" oninput="calculate()">
+    </div>
+
+    <div class="result-area">
+        <span class="result-label">Effective Calculated Rate:</span>
+        <span class="result-value" id="totalResult">0.00</span>
+    </div>
+</div>
+
+<script>
+    function calculate() {
+        const baseRate = parseFloat(document.getElementById('baseRate').value) || 0;
+        const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+        const utara = parseFloat(document.getElementById('utara').value) || 0;
+        const resultDisplay = document.getElementById('totalResult');
+
+        if (utara > 0) {
+            const finalRate = (baseRate + expenses) / (utara / 100);
+            resultDisplay.innerText = finalRate.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2});
+        } else {
+            resultDisplay.innerText = "0.00";
+        }
+    }
+</script>
+
+</body>
+</html>
